@@ -29,9 +29,8 @@ def button(msg, font_size, x, y, w, h, ac, ic, action=None):
         pygame.draw.rect(window, ac, (x, y, w, h))
 
         # if the button is pressed with left click
-        if click[0] == 1 and action != None:
+        if click[0] == 1:
             pressed = True
-            action()
 
     # if the cursor is not inside the button, we use the inactive color
     else:
@@ -43,20 +42,46 @@ def button(msg, font_size, x, y, w, h, ac, ic, action=None):
     textRect = textSurf.get_rect()
     textRect.center = ((x + (w / 2)), (y + (h / 2)))
     window.blit(textSurf, textRect)
-
     return pressed
 
+
+# wysi function!!!!!!
+def wysi():
+    window.blit(wysiImg, (0, 0))
+
+# intro
+def intro():
+    intro = True
+    window.fill(white)
+
+    while intro:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                intro = False
+                pygame.quit()
+                quit()
+
+        if button("727", 30, 95, 75, 150, 100, dark_green, green):
+            intro = False
+        
+        pygame.display.update()
+        clock.tick(30)
+
 if __name__ == "__main__":
+    intro()
+
     running = True
     window.fill(white)
 
     while running:
-        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
                 pygame.quit()
                 quit()
+
+        wysi()
 
         pygame.display.update()
         clock.tick(30)
